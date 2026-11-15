@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
+// import that elements we want to use
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonFooter, IonButton, IonButtons, IonIcon, IonRow, IonCol} from '@ionic/angular/standalone';
+import { addIcons } from 'ionicons'; // import addIcons() so we can get out icons
+import {statsChart, moon, home, sunny, person} from 'ionicons/icons'; // import the name of the icons we want to use, use camelCase
 import { SleepService } from '../services/sleep.service';
 import { SleepData } from '../data/sleep-data';
 import { OvernightSleepData } from '../data/overnight-sleep-data';
@@ -9,11 +12,11 @@ import { StanfordSleepinessData } from '../data/stanford-sleepiness-data';
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent],
+  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonFooter, IonButton, IonButtons, IonIcon, IonRow, IonCol],
 })
 export class HomePage {
   constructor(public sleepService:SleepService) {
-
+		addIcons({statsChart, moon, home, sunny, person}); // call the addIcons() func with our icons so we can use them
 	}
 
 	ngOnInit() {
