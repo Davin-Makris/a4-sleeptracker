@@ -9,9 +9,10 @@ export const routes: Routes = [
     path: '',
     redirectTo: 'home',
     pathMatch: 'full',
-  },  {
+  },
+  {
     path: 'overnight',
-    loadComponent: () => import('./overnight/overnight/overnight.page').then( m => m.OvernightPage)
+    loadComponent: () => import('./overnight/overnight.page').then( m => m.OvernightPage)
   },
   {
     path: 'day',
