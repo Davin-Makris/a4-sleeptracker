@@ -1,11 +1,33 @@
+ion-content {
+  --ion-background-color: #3f314d;
+}
+
+ion-content::part(scroll) {
+  display: flex;
+  flex-direction: column;
+}
+
+.main_title{
+  margin: 5%;
+  margin-bottom: auto;
+}
+
+#overnight_card{
+  margin-bottom: 3%;
+}
+
+#daily_card{
+  margin-bottom: 8%;
+}
+
 #container {
   text-align: center;
 
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  //position: absolute;
+  //left: 0;
+  //right: 0;
+  //top: 20%;
+  //transform: translateY(-50%);
 }
 
 #container strong {

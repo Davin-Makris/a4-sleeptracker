@@ -1,24 +1,32 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Hello [user]</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <h1 size="large" class="main_title">Hello [user]</h1>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <!-- Card to overnight log-->
+  <ion-card class="log_card" id="overnight_card">
+    <ion-card-header>
+      <ion-card-title>Overnight Log</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      Log last night's sleep
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Card to daily tiredness-->
+  <ion-card class="log_card" id="daily_card">
+    <ion-card-header>
+      <ion-card-title>Daily Tiredness</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      Log today's tiredness
+    </ion-card-content>
+  </ion-card>
 </ion-content>
 
 <ion-footer [translucent]="true" id="footer">
 <ion-toolbar>
-  <ion-row class="ion-justify-content-evenly" display="flex">
+  <ion-row class="ion-justify-content-evenly">
     <!-- Stats button-->
     <ion-col class="ion-text-center">
       <ion-button class="footer_button" fill="clear">
