@@ -7,9 +7,21 @@ ion-content::part(scroll) {
   flex-direction: column;
 }
 
+ion-footer{
+  --ion-background-color: #39203A;
+}
+
 .main_title{
   margin: 5%;
   margin-bottom: auto;
+}
+
+.footer_icon{
+  color: #DEDEDE;
+}
+
+.log_card{
+  background-color: #3A3880;
 }
 
 #overnight_card{
