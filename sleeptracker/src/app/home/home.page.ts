@@ -9,13 +9,14 @@ import { SleepService } from '../services/sleep.service';
 import { SleepData } from '../data/sleep-data';
 import { OvernightSleepData } from '../data/overnight-sleep-data';
 import { StanfordSleepinessData } from '../data/stanford-sleepiness-data';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonFooter, IonButton, IonButtons, IonIcon, IonRow, IonCol, 
-			IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonItem
+			IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonItem, RouterLink
   ],
 })
 export class HomePage {
