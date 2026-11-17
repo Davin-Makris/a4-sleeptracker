@@ -1,0 +1,55 @@
+ion-content {
+  --ion-background-color: #2D2B62;
+}
+
+ion-content::part(scroll) {
+  display: flex;
+  flex-direction: column;
+}
+
+.main_title{
+  margin: 5%;
+  margin-bottom: auto;
+}
+
+.overnight_card{
+  background-color: #3A3880;
+}
+
+// make the overall time picker smaller
+.time_picker {
+  // shrink the wheel rows and text
+  --wheel-item-height: 18px;
+  --wheel-item-font-size: 1rem;
+  --wheel-fade-background-rgb: var(--ion-card-background, #fff);
+
+  // get rid of the default padding and let it size to content
+  //padding: 0;
+  width: 300px;
+  max-width: 300px;
+  height: 100px;
+  //margin: 0 auto;
+  border-radius: 12px;
+  padding-bottom: 5%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 5%;
+}
+
+// the wheel area
+.time_picker::part(wheel-item) {
+  font-size: 0.95rem;
+  color: var(--ion-text-color);
+}
+
+.time_picker::part(wheel-item active) {
+  font-weight: 600;
+}
+
+#bed_card{
+  margin-bottom: 3%;
+}
+
+#wakeup_card{
+  margin-bottom: 8%;
+}
