@@ -7,8 +7,6 @@ ion-content::part(scroll) {
   flex-direction: column;
 }
 
-
-
 .main_title{
   margin: 5%;
   margin-bottom: auto;
@@ -50,6 +48,8 @@ ion-content::part(scroll) {
 
 .submit_button{
     margin: 5%;
+    --background: #A02C66;
+    --color: white;
 }
 
 #bed_card{
