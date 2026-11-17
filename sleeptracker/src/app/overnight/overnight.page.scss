@@ -7,6 +7,8 @@ ion-content::part(scroll) {
   flex-direction: column;
 }
 
+
+
 .main_title{
   margin: 5%;
   margin-bottom: auto;
@@ -23,17 +25,17 @@ ion-content::part(scroll) {
   --wheel-item-font-size: 1rem;
   --wheel-fade-background-rgb: var(--ion-card-background, #fff);
 
-  // get rid of the default padding and let it size to content
-  //padding: 0;
   width: 300px;
   max-width: 300px;
   height: 100px;
-  //margin: 0 auto;
   border-radius: 12px;
   padding-bottom: 5%;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 // the wheel area
@@ -46,10 +48,14 @@ ion-content::part(scroll) {
   font-weight: 600;
 }
 
+.submit_button{
+    margin: 5%;
+}
+
 #bed_card{
-  margin-bottom: 3%;
+  margin-bottom: 2%;
 }
 
 #wakeup_card{
-  margin-bottom: 8%;
+  margin-bottom: 1%;
 }
