@@ -1,0 +1,41 @@
+ion-content {
+  --ion-background-color: #2D2B62;
+}
+
+ion-content::part(scroll) {
+  display: flex;
+  flex-direction: column;
+}
+
+.input_wrapper{
+    --background: #3A3880;
+    //--ion-item-background: #3A3880;
+    //color: white;
+}
+
+.main_title{
+  margin: 5%;
+  margin-bottom: auto;
+}
+
+.profile_card{
+  background-color: #3A3880;
+}
+
+.save_button{
+    margin: 5%;
+    --background: #A02C66;
+    --color: white;
+}
+
+#pfp_card{
+  margin-bottom: 2%;
+}
+
+#name_card{
+  margin-bottom: 1%;
+}
+
+#name_instr{
+    color: white;
+}

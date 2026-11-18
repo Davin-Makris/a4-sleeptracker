@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 // import that elements we want to use
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonFooter, IonButton, IonButtons, IonIcon, IonRow, IonCol,
-		IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonItem
+import { IonHeader, IonTitle, IonContent, IonFooter, IonButton, IonButtons, IonIcon, IonRow, IonCol,
+		IonCard, IonCardHeader, IonCardTitle, IonCardContent
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons'; // import addIcons() so we can get out icons
 import {statsChart, moon, home, sunny, person} from 'ionicons/icons'; // import the name of the icons we want to use, use camelCase
@@ -15,8 +15,8 @@ import { RouterLink } from '@angular/router';
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonFooter, IonButton, IonButtons, IonIcon, IonRow, IonCol, 
-			IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonItem, RouterLink
+  imports: [IonHeader, IonTitle, IonContent, IonFooter, IonButton, IonButtons, IonIcon, IonRow, IonCol, 
+			IonCard, IonCardHeader, IonCardTitle, IonCardContent, RouterLink
   ],
 })
 export class HomePage {
