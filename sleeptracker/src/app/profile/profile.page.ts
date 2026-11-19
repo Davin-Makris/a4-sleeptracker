@@ -13,7 +13,7 @@ import { IonContent, IonHeader, IonTitle, IonCard, IonCardContent, IonCardHeader
       IonButton, IonIcon, IonInput, IonItem, IonRadio, IonRadioGroup]
 })
 export class ProfilePage implements OnInit {
-  userName: string = "username" // set to user as deafult
+  userName: string = "" // set to blank as deafult
   pfpIconName: string = "person"; // the pfp is the "person" icon by default
 
   constructor() { }
