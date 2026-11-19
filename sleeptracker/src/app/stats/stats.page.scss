@@ -1,0 +1,47 @@
+ion-content {
+  --ion-background-color: #2D2B62;
+}
+
+ion-content::part(scroll) {
+  display: flex;
+  flex-direction: column;
+}
+
+.main_title{
+  margin: 5%;
+  margin-bottom: auto;
+}
+
+.stats_card{
+  background-color: #3A3880;
+}
+
+#top_card{
+  margin-bottom: 3%;
+}
+
+#bottom_card{
+  margin-bottom: 8%;
+}
+
+#container {
+  text-align: center;
+}
+
+#container strong {
+  font-size: 20px;
+  line-height: 26px;
+}
+
+#container p {
+  font-size: 16px;
+  line-height: 22px;
+
+  color: #8c8c8c;
+
+  margin: 0;
+}
+
+#container a {
+  text-decoration: none;
+}
