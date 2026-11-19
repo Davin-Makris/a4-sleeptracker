@@ -1,36 +1,8 @@
 <!-- all icons as buttons:
 
-      <ion-button id="pfp_person_button" fill="clear">
-        <ion-icon id="pfp_person_icon" name="person" size="medium"></ion-icon>
-      </ion-button>
-
-      <ion-button if="pfp_moon_button" fill="clear">
-        <ion-icon id="pfp_moon_icon" name="moon" size="medium"></ion-icon>
-      </ion-button>
-
-      <ion-button if="pfp_sun_button" fill="clear">
-        <ion-icon id="pfp_sun_icon" name="sunny" size="medium"></ion-icon>
-      </ion-button>
       
-      <ion-button if="pfp_heart_button" fill="clear">
-        <ion-icon id="pfp_heart_icon" name="heart" size="medium"></ion-icon>
-      </ion-button>
-
-      <ion-button if="pfp_happy_button" fill="clear">
-        <ion-icon id="pfp_happy_icon" name="happy" size="medium"></ion-icon>
-      </ion-button>
  
 
--->
-
-<ion-content [fullscreen]="true">
-  <h1 size="large" class="main_title">Hello [user]</h1>
-
-  <!-- Card for profile icon & buttons-->
-  <ion-card class="profile_card" id="pfp_card">
-  
-    <ion-card-content>
-      <ion-icon id="chosen_pfp_icon" name="person" size="large"></ion-icon><br />
 
       <ion-radio-group id="pfp_icons_picker">
         <ion-radio value="person">
@@ -43,11 +15,41 @@
           <ion-icon id="pfp_moon_icon" name="moon" size="medium"></ion-icon>
         </ion-radio>
       </ion-radio-group>
-      
-    </ion-card-content>
+-->
 
-    <ion-card-content>
-      Choose your profile icon
+<ion-content [fullscreen]="true">
+  <h1 size="large" class="main_title">Hello [user]</h1>
+
+  <!-- Card for profile icon & buttons-->
+  <ion-card class="profile_card ion-text-center" id="pfp_card">
+  
+    <ion-card-content id="pfp_card_content">
+      <!-- the icon chosen as the pfp-->
+      <ion-icon id="chosen_pfp_icon" [name]="pfpIconName" size="large"></ion-icon><br />
+
+      <!-- button pfp options-->
+      <ion-button id="pfp_person_button" fill="clear" (click)="changePfpToPerson()">
+        <ion-icon id="pfp_person_icon" name="person" size="medium"></ion-icon>
+      </ion-button>
+
+      <ion-button if="pfp_moon_button" fill="clear" (click)="changePfpToMoon()">
+        <ion-icon id="pfp_moon_icon" name="moon" size="medium"></ion-icon>
+      </ion-button>
+
+      <ion-button if="pfp_sun_button" fill="clear" (click)="changePfpToSun()">
+        <ion-icon id="pfp_sun_icon" name="sunny" size="medium"></ion-icon>
+      </ion-button>
+      
+      <ion-button if="pfp_heart_button" fill="clear" (click)="changePfpToHeart()">
+        <ion-icon id="pfp_heart_icon" name="heart" size="medium"></ion-icon>
+      </ion-button>
+
+      <ion-button if="pfp_happy_button" fill="clear" (click)="changePfpToHappy()">
+        <ion-icon id="pfp_happy_icon" name="happy" size="medium"></ion-icon>
+      </ion-button>
+
+      <!-- <br />Choose your profile icon -->
+      
     </ion-card-content>
   </ion-card>
 

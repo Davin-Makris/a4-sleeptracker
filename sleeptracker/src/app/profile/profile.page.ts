@@ -13,10 +13,32 @@ import { IonContent, IonHeader, IonTitle, IonCard, IonCardContent, IonCardHeader
       IonButton, IonIcon, IonInput, IonItem, IonRadio, IonRadioGroup]
 })
 export class ProfilePage implements OnInit {
+  pfpIconName: string = "person"; // the pfp is the "person" icon by default
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  // used for the (click) action of the icon buttons
+  changePfpToPerson (): void{
+    this.pfpIconName = "person";
+  }
+
+  changePfpToMoon (): void{
+    this.pfpIconName = "moon";
+  }
+
+  changePfpToSun (): void{
+    this.pfpIconName = "sunny";
+  }
+
+  changePfpToHeart (): void{
+    this.pfpIconName = "heart";
+  }
+
+  changePfpToHappy (): void{
+    this.pfpIconName = "happy";
   }
 
 }
