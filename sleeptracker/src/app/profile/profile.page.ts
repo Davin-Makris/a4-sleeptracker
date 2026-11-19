@@ -13,11 +13,17 @@ import { IonContent, IonHeader, IonTitle, IonCard, IonCardContent, IonCardHeader
       IonButton, IonIcon, IonInput, IonItem, IonRadio, IonRadioGroup]
 })
 export class ProfilePage implements OnInit {
+  userName: string = "username" // set to user as deafult
   pfpIconName: string = "person"; // the pfp is the "person" icon by default
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  // save button click
+  saveButton(userInput: string | number | null | undefined): void {
+    this.userName = (userInput ?? '').toString().trim();
   }
 
   // used for the (click) action of the icon buttons

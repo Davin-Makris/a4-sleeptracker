@@ -18,7 +18,7 @@
 -->
 
 <ion-content [fullscreen]="true">
-  <h1 size="large" class="main_title">Hello [user]</h1>
+  <h1 size="large" class="main_title" id="pfp_main_title">Hello {{userName}}</h1>
 
   <!-- Card for profile icon & buttons-->
   <ion-card class="profile_card ion-text-center" id="pfp_card">
@@ -55,8 +55,8 @@
 
   <!-- Card for name & morning/night person buttons-->
   <ion-card class="profile_card" id="name_card">
-     <ion-item class="input_wrapper">
-      <ion-input label="Name: " placeholder="Enter your name" class="name_input" id="name_input"></ion-input>
+    <ion-item class="input_wrapper">
+      <ion-input #name_input label="Name: " placeholder="Enter your name" id="name_input"></ion-input>
     </ion-item>
 
     <ion-card-content>
@@ -72,6 +72,6 @@
     <!-- Save button-->
    <!-- when this button is clicked, a modal should pop up with either success or error
     The info is also sent to backend to be saved in the user's log data-->
-   <ion-button class="save_button" id="profile_save_button" shape="round">Save</ion-button>
+   <ion-button class="save_button" id="profile_save_button" shape="round" (click)="saveButton(name_input.value)">Save</ion-button>
 
 </ion-content>
