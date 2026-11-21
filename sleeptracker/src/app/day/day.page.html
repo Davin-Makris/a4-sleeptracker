@@ -35,6 +35,7 @@
    <!-- when this button is clicked, a modal should pop up with either success or error
     The info is also sent to backend to be saved in the user's log data-->
    <ion-button class="submit_button" id="day_submit_button" shape="round">Submit Log</ion-button>
-   <ion-toast class="submit_toast" trigger="day_submit_button" position="top" message="Submitted!" duration="5000"></ion-toast>
+   <ion-toast class="submit_toast" trigger="day_submit_button" position="top" message="Submitted!" 
+              [buttons]="toastButtons" duration="5000"></ion-toast>
 </ion-content>
 

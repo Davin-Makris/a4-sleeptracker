@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonCard, IonCardHeader, IonCardTitle, 
-        IonCardContent, IonDatetime, IonButton, IonToast} from '@ionic/angular/standalone';
+        IonDatetime, IonButton, IonToast} from '@ionic/angular/standalone';
 
 import { SleepStorageService } from '../services/local-storage.service';
 
@@ -17,15 +17,28 @@ interface OvernightRecord {
   styleUrls: ['./overnight.page.scss'],
   standalone: true,
   imports: [IonContent, IonHeader, CommonModule, FormsModule, IonCard, IonCardHeader, 
-          IonCardTitle, IonCardContent, IonDatetime, IonButton, IonToast]
+          IonCardTitle, IonDatetime, IonButton, IonToast]
 })
 
 export class OvernightPage {
   sleepStart = new Date().toISOString();
   sleepEnd = new Date().toISOString();
 
+  // this is the cancel button for the ion-toast in overnight.page.html
+   toastButtons = [
+    {
+      text: 'Cancel',
+      role: 'cancel',
+      handler: () => {
+        console.log('Cancel button clicked');
+        this.undoSubmit();
+      },
+    },
+  ];
+
   constructor(private storage: SleepStorageService) {}
 
+  // submits and saves the log to the data storage
   async submitLog(): Promise<void> {
     const start = new Date(this.sleepStart);
     const end = new Date(this.sleepEnd);
@@ -45,5 +58,10 @@ export class OvernightPage {
 
     console.log("Logged data: " + this.sleepStart + " " + this.sleepEnd);
     await this.storage.set('overnight-records', records);
+  }
+
+  // used for the "Cancel" button to undo the submit action
+  undoSubmit() {
+    //  cancel logic
   }
 }

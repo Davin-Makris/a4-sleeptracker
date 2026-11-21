@@ -16,9 +16,26 @@ import { SleepStorageService } from '../services/local-storage.service';
 })
 export class DayPage implements OnInit {
 
+    // this is the cancel button for the ion-toast in overnight.page.html
+   toastButtons = [
+    {
+      text: 'Cancel',
+      role: 'cancel',
+      handler: () => {
+        console.log('Cancel button clicked');
+        this.undoSubmit();
+      },
+    },
+  ];
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  // used for the "Cancel" button to undo the submit action
+  undoSubmit() {
+    //  cancel logic
   }
 
 }
