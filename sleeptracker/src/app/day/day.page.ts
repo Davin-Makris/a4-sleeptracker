@@ -6,6 +6,11 @@ import { IonContent, IonHeader, IonCard, IonCardContent,
 
 import { SleepStorageService } from '../services/local-storage.service';
 
+interface SleepinessRecord{
+  timeOfDay: string;
+  sleepinessScore : number;
+}
+
 @Component({
   selector: 'app-day',
   templateUrl: './day.page.html',
@@ -15,6 +20,10 @@ import { SleepStorageService } from '../services/local-storage.service';
         IonCard, IonCardContent, IonCardHeader, IonRange, IonButton, IonCardTitle, IonDatetime, IonToast]
 })
 export class DayPage implements OnInit {
+  timeOfDay = new Date().toISOString();
+  sleepinessScore = 0;
+
+  readonly key = "sleepiness-records"
 
     // this is the cancel button for the ion-toast in overnight.page.html
    toastButtons = [
@@ -28,14 +37,36 @@ export class DayPage implements OnInit {
     },
   ];
 
-  constructor() { }
+  constructor(private storage: SleepStorageService) {}
+  
+    // submits and saves the log to the data storage
+    async submitLog(): Promise<void> {
+      const time = new Date(this.timeOfDay);
+      const score = this.sleepinessScore;
+  
+      const records =
+        await this.storage.get<SleepinessRecord[]>(this.key) ?? [];
+  
+      records.push({
+        timeOfDay: time.toISOString(),
+        sleepinessScore: score,
+      });
+  
+      console.log("Logged data: " + time + " " + score);
+      await this.storage.set(this.key, records);
+    }
+  
+    // used for the "Cancel" button to undo the submit action
+    async undoSubmit() {
+      //  cancel logic
+      const records = await this.storage.get<SleepinessRecord[]>(this.key);
+      records?.pop();
+      await this.storage.set(this.key, records);
+  
+    }
 
-  ngOnInit() {
-  }
-
-  // used for the "Cancel" button to undo the submit action
-  undoSubmit() {
-    //  cancel logic
-  }
+    ngOnInit(): void {
+      
+    }
 
 }

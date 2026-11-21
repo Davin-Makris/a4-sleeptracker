@@ -12,7 +12,8 @@
       max="7"
       step="1"
       snaps="true"
-      value="0">
+      value="0"
+      [(ngModel)] = "sleepinessScore">
     </ion-range>
 
     
@@ -24,7 +25,7 @@
       <ion-card-title>What time is it?</ion-card-title>
     </ion-card-header>
 
-    <ion-datetime presentation="time" class="time_picker" id="curr_time_picker"></ion-datetime>
+    <ion-datetime presentation="time" class="time_picker" id="curr_time_picker" [(ngModel)]="timeOfDay"></ion-datetime>
 
     <!-- 
     <ion-card-content>Log last night's sleep</ion-card-content>
@@ -34,7 +35,7 @@
   <!-- Submit button-->
    <!-- when this button is clicked, a modal should pop up with either success or error
     The info is also sent to backend to be saved in the user's log data-->
-   <ion-button class="submit_button" id="day_submit_button" shape="round">Submit Log</ion-button>
+   <ion-button class="submit_button" id="day_submit_button" shape="round" (click)="submitLog()">Submit Log</ion-button>
    <ion-toast class="submit_toast" trigger="day_submit_button" position="top" message="Submitted!" 
               [buttons]="toastButtons" duration="5000"></ion-toast>
 </ion-content>

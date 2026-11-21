@@ -20,9 +20,11 @@ interface OvernightRecord {
           IonCardTitle, IonDatetime, IonButton, IonToast]
 })
 
-export class OvernightPage {
+export class OvernightPage implements OnInit{
   sleepStart = new Date().toISOString();
   sleepEnd = new Date().toISOString();
+
+  readonly key ='overnight-records';
 
   // this is the cancel button for the ion-toast in overnight.page.html
    toastButtons = [
@@ -32,6 +34,7 @@ export class OvernightPage {
       handler: () => {
         console.log('Cancel button clicked');
         this.undoSubmit();
+        
       },
     },
   ];
@@ -49,7 +52,7 @@ export class OvernightPage {
     }
 
     const records =
-      await this.storage.get<OvernightRecord[]>('overnight-records') ?? [];
+      await this.storage.get<OvernightRecord[]>(this.key) ?? [];
 
     records.push({
       sleepStart: start.toISOString(),
@@ -57,11 +60,19 @@ export class OvernightPage {
     });
 
     console.log("Logged data: " + this.sleepStart + " " + this.sleepEnd);
-    await this.storage.set('overnight-records', records);
+    await this.storage.set(this.key, records);
   }
 
   // used for the "Cancel" button to undo the submit action
-  undoSubmit() {
+  async undoSubmit() {
     //  cancel logic
+    const records = await this.storage.get<OvernightRecord[]>(this.key);
+    records?.pop();
+    await this.storage.set(this.key, records);
+
+  }
+
+  ngOnInit(): void {
+    
   }
 }
