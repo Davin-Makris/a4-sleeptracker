@@ -6,7 +6,7 @@
     <ion-card-header>
       <ion-card-title>When did you sleep?</ion-card-title>
     </ion-card-header>
-    <ion-datetime presentation="time" class="time_picker" id="bed_time_picker"></ion-datetime>
+    <ion-datetime presentation="time" class="time_picker" id="bed_time_picker" [(ngModel)]="sleepStart"></ion-datetime>
 
     <!-- 
     <ion-card-content>Log last night's sleep</ion-card-content>
@@ -20,7 +20,7 @@
       <ion-card-title>When did you wake up?</ion-card-title>
     </ion-card-header>
 
-    <ion-datetime presentation="time" class="time_picker" id="wakeup_time_picker"></ion-datetime>
+    <ion-datetime presentation="time" class="time_picker" id="wakeup_time_picker" [(ngModel)]="sleepEnd"></ion-datetime>
 
     <!-- 
     <ion-card-content>Log last night's sleep</ion-card-content>
@@ -30,5 +30,5 @@
   <!-- Submit button-->
    <!-- when this button is clicked, a modal should pop up with either success or error
     The info is also sent to backend to be saved in the user's log data-->
-   <ion-button class="submit_button" id="overnight_submit_button" shape="round">Submit Log</ion-button>
+   <ion-button class="submit_button" id="overnight_submit_button" shape="round" (click)="submitLog()">Submit Log</ion-button>
 </ion-content>

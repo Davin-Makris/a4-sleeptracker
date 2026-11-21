@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonCard, IonCardContent, 
       IonCardHeader, IonCardTitle, IonRange, IonButton, IonDatetime} from '@ionic/angular/standalone';
 
+import { SleepStorageService } from '../services/local-storage.service';
+
 @Component({
   selector: 'app-day',
   templateUrl: './day.page.html',

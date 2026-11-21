@@ -22,4 +22,17 @@
       Example
     </ion-card-content>
   </ion-card>
+
+  <ion-button
+    shape="round"
+    (click)="clearData()">
+    Clear All Data
+  </ion-button>
+
+  @for (record of allRecords; track $index) {
+  <p>{{ record | json }}</p>
+  } @empty {
+  <p>No sleep records have been saved.</p>
+  }
+
 </ion-content>
