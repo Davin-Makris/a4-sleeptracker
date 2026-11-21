@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonCard, IonCardContent, IonCardHeader, IonCardTitle, 
-      IonButton, IonIcon, IonInput, IonItem, IonRadio, IonRadioGroup} from '@ionic/angular/standalone';
+import { IonContent, IonCard, IonCardContent,
+      IonButton, IonIcon, IonInput, IonItem, IonRadio, IonRadioGroup, IonToast} from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, CommonModule, FormsModule, IonCard, IonCardContent, IonCardHeader, IonCardTitle, 
-      IonButton, IonIcon, IonInput, IonItem, IonRadio, IonRadioGroup]
+  imports: [IonContent, CommonModule, FormsModule, IonCard, IonCardContent,
+      IonButton, IonIcon, IonInput, IonItem, IonRadio, IonRadioGroup, IonToast]
 })
 export class ProfilePage implements OnInit {
   userName: string = "" // set to blank as deafult

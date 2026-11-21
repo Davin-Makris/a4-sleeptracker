@@ -73,5 +73,6 @@
    <!-- when this button is clicked, a modal should pop up with either success or error
     The info is also sent to backend to be saved in the user's log data-->
    <ion-button class="save_button" id="profile_save_button" shape="round" (click)="saveButton(name_input.value)">Save</ion-button>
+   <ion-toast class="save_toast" trigger="profile_save_button" position="top" message="Saved!" duration="5000"></ion-toast>
 
 </ion-content>

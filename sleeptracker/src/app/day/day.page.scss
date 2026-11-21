@@ -7,6 +7,12 @@ ion-content::part(scroll) {
   flex-direction: column;
 }
 
+ion-toast.submit_toast {
+    --background: #222428;
+    --box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, 0.2);
+    --color: white;
+}
+
 .main_title{
   margin: 5%;
   margin-bottom: auto;

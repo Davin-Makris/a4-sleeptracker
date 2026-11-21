@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonCard, IonCardContent, 
-      IonCardHeader, IonCardTitle, IonRange, IonButton, IonDatetime} from '@ionic/angular/standalone';
+      IonCardHeader, IonCardTitle, IonRange, IonButton, IonDatetime, IonToast} from '@ionic/angular/standalone';
 
 import { SleepStorageService } from '../services/local-storage.service';
 
@@ -12,7 +12,7 @@ import { SleepStorageService } from '../services/local-storage.service';
   styleUrls: ['./day.page.scss'],
   standalone: true,
   imports: [IonContent, IonHeader, CommonModule, FormsModule, 
-        IonCard, IonCardContent, IonCardHeader, IonRange, IonButton, IonCardTitle, IonDatetime]
+        IonCard, IonCardContent, IonCardHeader, IonRange, IonButton, IonCardTitle, IonDatetime, IonToast]
 })
 export class DayPage implements OnInit {
 

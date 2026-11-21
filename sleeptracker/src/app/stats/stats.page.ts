@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardContent, IonCardHeader, 
+import { IonContent, IonCard, IonCardContent, IonCardHeader, 
   IonCardTitle, IonButton} from '@ionic/angular/standalone';
 
 import { SleepStorageService } from '../services/local-storage.service';
@@ -11,7 +11,7 @@ import { SleepStorageService } from '../services/local-storage.service';
   templateUrl: './stats.page.html',
   styleUrls: ['./stats.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonCard, 
+  imports: [IonContent, CommonModule, FormsModule, IonCard, 
       IonCardContent, IonCardHeader, IonCardTitle, IonButton]
 })
 export class StatsPage implements OnInit {

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonCard, IonCardHeader, IonCardTitle, 
-        IonCardContent, IonDatetime, IonButton} from '@ionic/angular/standalone';
+        IonCardContent, IonDatetime, IonButton, IonToast} from '@ionic/angular/standalone';
 
 import { SleepStorageService } from '../services/local-storage.service';
 
@@ -17,7 +17,7 @@ interface OvernightRecord {
   styleUrls: ['./overnight.page.scss'],
   standalone: true,
   imports: [IonContent, IonHeader, CommonModule, FormsModule, IonCard, IonCardHeader, 
-          IonCardTitle, IonCardContent, IonDatetime, IonButton]
+          IonCardTitle, IonCardContent, IonDatetime, IonButton, IonToast]
 })
 
 export class OvernightPage {
