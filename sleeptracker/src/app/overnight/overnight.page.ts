@@ -5,11 +5,7 @@ import { IonContent, IonHeader, IonCard, IonCardHeader, IonCardTitle,
         IonDatetime, IonButton, IonToast} from '@ionic/angular/standalone';
 
 import { SleepStorageService } from '../services/local-storage.service';
-
-interface OvernightRecord {
-  sleepStart: string;
-  sleepEnd: string;
-}
+import { OvernightSleepData } from '../data/overnight-sleep-data';
 
 @Component({
   selector: 'app-overnight',
@@ -47,17 +43,14 @@ export class OvernightPage implements OnInit{
     const end = new Date(this.sleepEnd);
 
     // A wake time earlier than bedtime means the following day.
-    if (end <= start) {
-      end.setDate(end.getDate() + 1);
-    }
+    //if (end <= start) {
+    //  end.setDate(end.getDate() + 1);
+    //}
 
     const records =
-      await this.storage.get<OvernightRecord[]>(this.key) ?? [];
+      await this.storage.get<OvernightSleepData[]>(this.key) ?? [];
 
-    records.push({
-      sleepStart: start.toISOString(),
-      sleepEnd: end.toISOString(),
-    });
+    records.push(new OvernightSleepData(start, end));
 
     console.log("Logged data: " + this.sleepStart + " " + this.sleepEnd);
     await this.storage.set(this.key, records);
@@ -66,7 +59,7 @@ export class OvernightPage implements OnInit{
   // used for the "Cancel" button to undo the submit action
   async undoSubmit() {
     //  cancel logic
-    const records = await this.storage.get<OvernightRecord[]>(this.key);
+    const records = await this.storage.get<OvernightSleepData[]>(this.key);
     records?.pop();
     await this.storage.set(this.key, records);
 

@@ -5,6 +5,7 @@ import { IonContent, IonHeader, IonCard, IonCardContent,
       IonCardHeader, IonCardTitle, IonRange, IonButton, IonDatetime, IonToast} from '@ionic/angular/standalone';
 
 import { SleepStorageService } from '../services/local-storage.service';
+import { StanfordSleepinessData } from '../data/stanford-sleepiness-data';
 
 interface SleepinessRecord{
   timeOfDay: string;
@@ -45,12 +46,9 @@ export class DayPage implements OnInit {
       const score = this.sleepinessScore;
   
       const records =
-        await this.storage.get<SleepinessRecord[]>(this.key) ?? [];
+        await this.storage.get<StanfordSleepinessData[]>(this.key) ?? [];
   
-      records.push({
-        timeOfDay: time.toISOString(),
-        sleepinessScore: score,
-      });
+      records.push( new StanfordSleepinessData(score, time));
   
       console.log("Logged data: " + time + " " + score);
       await this.storage.set(this.key, records);
@@ -59,7 +57,7 @@ export class DayPage implements OnInit {
     // used for the "Cancel" button to undo the submit action
     async undoSubmit() {
       //  cancel logic
-      const records = await this.storage.get<SleepinessRecord[]>(this.key);
+      const records = await this.storage.get<StanfordSleepinessData[]>(this.key);
       records?.pop();
       await this.storage.set(this.key, records);
   
