@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonCard, IonCardContent, IonCardHeader, 
-  IonCardTitle, IonButton} from '@ionic/angular/standalone';
+  IonCardTitle, IonButton, IonToast} from '@ionic/angular/standalone';
 import Chart from "chart.js/auto"
 
 import { OvernightSleepData } from '../data/overnight-sleep-data';
@@ -15,12 +15,23 @@ import { StanfordSleepinessData } from '../data/stanford-sleepiness-data';
   styleUrls: ['./stats.page.scss'],
   standalone: true,
   imports: [IonContent, CommonModule, FormsModule, IonCard, 
-      IonCardContent, IonCardHeader, IonCardTitle, IonButton]
+      IonCardContent, IonCardHeader, IonCardTitle, IonButton, IonToast]
 })
 export class StatsPage implements OnInit {
   sleepRecords: OvernightSleepData[] = [];
   wakeRecords: StanfordSleepinessData[] = [];
   private OvernightChart?: Chart;
+
+  // this is the cancel button for the clear data ion-toast in stats.page.html
+   toastButtons = [
+    {
+      text: 'Cancel',
+      role: 'cancel',
+      handler: () => {
+        this.undoClearData();
+      },
+    },
+  ];
 
   constructor(private storage: SleepStorageService) {}
 
@@ -124,6 +135,7 @@ export class StatsPage implements OnInit {
             max: 1440,
 
             ticks: {
+              color: '#ACACB9', // ACACB9- passes WCAG AAA for large text and AA for small text
               stepSize: 120,
               callback: (value:any) =>
                 OvernightSleepData.formatMinutes((Number(value) + hourOffset) % 1440),
@@ -135,6 +147,11 @@ export class StatsPage implements OnInit {
       }
       });
     } 
+  }
+
+  // this is for the cancel button in the clear data toast in stats.page.html
+  public undoClearData(): void{
+    console.log("clear data button clicked")
   }
 
 }

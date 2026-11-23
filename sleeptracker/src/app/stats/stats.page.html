@@ -23,10 +23,13 @@
 
   <ion-button
     class="submit_button"
+    id="clear_data_button"
     shape="round"
     (click)="clearData()">
     Clear All Data
   </ion-button>
+  <ion-toast class="clear_data_toast" trigger="clear_data_button" position="top" message="Cleared Data!" 
+              [buttons]="toastButtons" duration="5000"></ion-toast>
 
   <!--
   @for (record of sleepRecords; track $index) {

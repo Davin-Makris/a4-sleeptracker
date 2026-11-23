@@ -22,15 +22,19 @@ ion-card-content{
   color: #ACACB9;
 }
 
+ion-input{
+  --color: white;
+  --placeholder-color: #ACACB9; // same as the card-content text color
+}
+
 .input_wrapper{
     --background: #3A3880;
-    //--ion-item-background: #3A3880;
-    //color: white;
 }
 
 .main_title{
   margin: 5%;
   margin-bottom: auto;
+  color: white;
 }
 
 .profile_card{
