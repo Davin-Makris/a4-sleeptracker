@@ -13,6 +13,15 @@ ion-toast.submit_toast {
     --color: white;
 }
 
+ion-card-title{
+  color: white;
+}
+
+ion-card-content{
+  // ACACB9- passes WCAG AAA for large text and AA for small text
+  color: #ACACB9;
+}
+
 .main_title{
   margin: 5%;
   margin-bottom: auto;
@@ -28,6 +37,8 @@ ion-toast.submit_toast {
   --wheel-item-height: 18px;
   --wheel-item-font-size: 1rem;
   --wheel-fade-background-rgb: var(--ion-card-background, #fff);
+  --background: #222428;
+  --color: white;
 
   width: 300px;
   max-width: 300px;

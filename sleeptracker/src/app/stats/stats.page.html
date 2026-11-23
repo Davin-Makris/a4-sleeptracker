@@ -1,30 +1,28 @@
 <ion-content [fullscreen]="true">
   <h1 size="large" class="main_title">Your Data</h1>
 
-  <!-- Some example cards if you want to use these
-   Feel free to delete or change them-->
   <ion-card class="stats_card" id="top_card">
     <ion-card-header>
-      <ion-card-title>Card here</ion-card-title>
+      <ion-card-title>Your Daily Data</ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
-      Example
+      Chart here
     </ion-card-content>
   </ion-card>
 
   <ion-card class="stats_card" id="bottom_card">
     <ion-card-header>
-      <ion-card-title>Another Card</ion-card-title>
+      <ion-card-title>Your Sleep Data</ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
       <canvas id="sleep-line-chart"> </canvas>
-      Example
     </ion-card-content>
   </ion-card>
 
   <ion-button
+    class="submit_button"
     shape="round"
     (click)="clearData()">
     Clear All Data

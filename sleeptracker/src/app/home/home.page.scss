@@ -7,6 +7,15 @@ ion-content::part(scroll) {
   flex-direction: column;
 }
 
+ion-card-title{
+  color: white;
+}
+
+ion-card-content{
+  // ACACB9- passes WCAG AAA for large text and AA for small text
+  color: #ACACB9;
+}
+
 .main_title{
   margin: 5%;
   margin-bottom: auto;

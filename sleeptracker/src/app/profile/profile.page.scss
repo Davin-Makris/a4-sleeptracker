@@ -13,6 +13,15 @@ ion-toast.save_toast {
     --color: white;
 }
 
+ion-card-title{
+  color: white;
+}
+
+ion-card-content{
+  // ACACB9- passes WCAG AAA for large text and AA for small text
+  color: #ACACB9;
+}
+
 .input_wrapper{
     --background: #3A3880;
     //--ion-item-background: #3A3880;
