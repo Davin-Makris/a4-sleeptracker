@@ -42,8 +42,16 @@ export class StatsPage implements OnInit {
   }
 
   async clearData(): Promise<void> {
-    await this.storage.reset();
-    await this.fetchRecords();
+    var emptyRecords = await this.fetchRecords();
+    if (emptyRecords){
+      console.log("loading dummy data");
+      await this.loadDummyData();
+    }
+    else {
+      await this.storage.reset();
+      this.sleepRecords = [];
+      this.wakeRecords = [];
+    }
     this.makeCharts();
   }
 
@@ -66,12 +74,8 @@ export class StatsPage implements OnInit {
       return new OvernightSleepData(dataPt.sleepStart, dataPt.sleepEnd);
     })  ?? [])
     this.wakeRecords= (sleepinessRecords?.map((dataPT) => new StanfordSleepinessData(dataPT.loggedValue, dataPT.loggedAt)) ?? [])
-
-    if (this.sleepRecords.length + this.wakeRecords.length == 0){
-      return false;
-    }
-
-    return true;
+    return (this.sleepRecords.length + this.wakeRecords.length == 0);
+    
   }
 
   private makeDayChart(): void {
@@ -105,7 +109,7 @@ export class StatsPage implements OnInit {
             ticks: {color: '#ACACB9',}, // ACACB9- passes WCAG AAA for large text and AA for small text
             time: {
               // Luxon format string
-              tooltipFormat: 'MMM D h:mm a'
+              tooltipFormat: 'MMM d h:mm a'
             },
             title: {display: false,}
           },
@@ -202,26 +206,30 @@ export class StatsPage implements OnInit {
     });
   }
 
-  private loadDummyData(){
+  private async loadDummyData(){
     const sleepKey = 'overnight-records';
     const dayKey = "sleepiness-records";
 
-    for (var i = 14; i > 0; ++i){
-      var startTime = new Date();
-      startTime = new Date(startTime.getDate() - i)
-      startTime.setHours(20 + Math.random() * (6 * 60 * 60 * 1000));
-      var endTime = new Date(startTime.getDate()).setHours(startTime.getHours() + Math.random() * (10 * 60 * 60 * 1000));
+    for (var i = 14; i > 0; --i){
+      const day = new Date()
+      day.setDate(day.getDate() - i);
+      var startTime = new Date(day);
+      startTime.setHours(20  + Math.random() * (6), Math.random() * 60); //random time between 8pm and 2am
+      var endTime:Date = new Date(startTime)
+      endTime.setHours(startTime.getHours() + Math.random() * (4) + 6, Math.random() * 60); //sleep for a random time between 6 and 10 hours after start time
+      this.sleepRecords.push(new OvernightSleepData(startTime, endTime));
+
+      var loggedTime = new Date(day);
+      loggedTime.setHours(8 + Math.random() * 16, Math.random() * 60);
+      var loggedValue = Math.floor(Math.random() * (7) + 1);
+
+      this.wakeRecords.push(new StanfordSleepinessData(loggedValue, loggedTime));
     }
-    
-    this.sleepRecords = [];
+    await this.storage.set(sleepKey, this.sleepRecords);
+    await this.storage.set(dayKey, this.wakeRecords);
   }
 
-  private getRandomDate(start: Date, end: Date): Date {
-    const startMs = start.getTime();
-    const endMs = end.getTime();
-    const randomMs = startMs + Math.random() * (endMs - startMs);
-    return new Date(randomMs);
-  }
+ 
 
   // this is for the cancel button in the clear data toast in stats.page.html
   public undoClearData(): void{
