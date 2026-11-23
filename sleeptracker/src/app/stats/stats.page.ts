@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonCard, IonCardContent, IonCardHeader, 
   IonCardTitle, IonButton, IonToast} from '@ionic/angular/standalone';
 import Chart from "chart.js/auto"
+import 'chartjs-adapter-luxon';
 
 import { OvernightSleepData } from '../data/overnight-sleep-data';
 import { SleepStorageService } from '../services/local-storage.service';
@@ -21,6 +22,7 @@ export class StatsPage implements OnInit {
   sleepRecords: OvernightSleepData[] = [];
   wakeRecords: StanfordSleepinessData[] = [];
   private OvernightChart?: Chart;
+  private DayChart?: Chart;
 
   // this is the cancel button for the clear data ion-toast in stats.page.html
    toastButtons = [
@@ -42,15 +44,20 @@ export class StatsPage implements OnInit {
   async clearData(): Promise<void> {
     await this.storage.reset();
     await this.fetchRecords();
-    this.makeOvernightChart();
+    this.makeCharts();
   }
 
   async ionViewWillEnter(): Promise<void> {
     await this.fetchRecords();
+    this.makeCharts();
+  }
+
+  private makeCharts(): void {
+    this.makeDayChart();
     this.makeOvernightChart();
   }
 
-  private async fetchRecords(): Promise<void> {
+  private async fetchRecords(): Promise<boolean> {
     const [overnightRecords, sleepinessRecords] = await Promise.all([
       this.storage.get<OvernightSleepData[]>('overnight-records'),
       this.storage.get<StanfordSleepinessData[]>('sleepiness-records'),
@@ -58,7 +65,60 @@ export class StatsPage implements OnInit {
     this.sleepRecords = (overnightRecords?.map((dataPt) => {
       return new OvernightSleepData(dataPt.sleepStart, dataPt.sleepEnd);
     })  ?? [])
-    this.wakeRecords= (sleepinessRecords ?? [])
+    this.wakeRecords= (sleepinessRecords?.map((dataPT) => new StanfordSleepinessData(dataPT.loggedValue, dataPT.loggedAt)) ?? [])
+
+    if (this.sleepRecords.length + this.wakeRecords.length == 0){
+      return false;
+    }
+
+    return true;
+  }
+
+  private makeDayChart(): void {
+    const canvas = document.getElementById('day-chart') as HTMLCanvasElement | null;
+    const data = this.wakeRecords;
+
+    if (!data || !canvas){
+      return;
+    }
+
+    this.DayChart?.destroy();
+
+    this.DayChart = new Chart(canvas, {
+      type: 'line',
+      data: {
+        labels: this.wakeRecords.map((dataPT) => dataPT.loggedAt),
+
+        datasets: [
+          {
+            label: 'Restfulness',
+            data: this.wakeRecords.map((dataPT) => dataPT.loggedValue)
+          }
+        ]
+      },
+      options: {
+        plugins: {legend: {display: false,},},
+        
+        scales: {
+          x: {
+            type: 'time',
+            ticks: {color: '#ACACB9',}, // ACACB9- passes WCAG AAA for large text and AA for small text
+            time: {
+              // Luxon format string
+              tooltipFormat: 'MMM D h:mm a'
+            },
+            title: {display: false,}
+          },
+          y: {
+            title: {display: false,},
+            min:0,
+            max: 8,
+            
+            ticks: {stepSize: 1, color: '#ACACB9',} // ACACB9- passes WCAG AAA for large text and AA for small text
+          }
+        },
+      }
+    })
   }
 
   private makeOvernightChart(): void {
@@ -93,34 +153,28 @@ export class StatsPage implements OnInit {
       }
     }
 
-
-    if (canvas) {
-      this.OvernightChart = new Chart(canvas, {
+    this.OvernightChart = new Chart(canvas, {
       type: 'bar',
       data: {
-      labels: this.sleepRecords.map((_, index) => `Day ${index + 1}`),
+        labels: this.sleepRecords.map((_, index) => `Day ${index + 1}`),
 
-      datasets: [
-        {
-          label: 'Time asleep',
-          data: firstSegments,
-          backgroundColor: '#5260ff',
-          grouped: false,
-        },
-        {
-          label: 'Time asleep',
-          data: secondSegments,
-          backgroundColor: '#5260ff',
-          grouped: false,
-        },
-      ],
+        datasets: [
+          {
+            label: 'Time asleep',
+            data: firstSegments,
+            backgroundColor: '#5260ff',
+            grouped: false,
+          },
+          {
+            label: 'Time asleep',
+            data: secondSegments,
+            backgroundColor: '#5260ff',
+            grouped: false,
+          },
+        ],
       },
       options: {
-        plugins: {
-          legend: {
-            display: false,
-          },
-        },
+        plugins: {legend: {display: false,},},
 
         scales: {
           x: { //turn off the x ticks
@@ -129,7 +183,7 @@ export class StatsPage implements OnInit {
             title: {display: false,},
           },
 
-          y: {
+          y: { //translate the y ticks from minutes to a time
             type: 'linear',
             min: 0,
             max: 1440,
@@ -145,8 +199,28 @@ export class StatsPage implements OnInit {
           },
         },
       }
-      });
-    } 
+    });
+  }
+
+  private loadDummyData(){
+    const sleepKey = 'overnight-records';
+    const dayKey = "sleepiness-records";
+
+    for (var i = 14; i > 0; ++i){
+      var startTime = new Date();
+      startTime = new Date(startTime.getDate() - i)
+      startTime.setHours(20 + Math.random() * (6 * 60 * 60 * 1000));
+      var endTime = new Date(startTime.getDate()).setHours(startTime.getHours() + Math.random() * (10 * 60 * 60 * 1000));
+    }
+    
+    this.sleepRecords = [];
+  }
+
+  private getRandomDate(start: Date, end: Date): Date {
+    const startMs = start.getTime();
+    const endMs = end.getTime();
+    const randomMs = startMs + Math.random() * (endMs - startMs);
+    return new Date(randomMs);
   }
 
   // this is for the cancel button in the clear data toast in stats.page.html

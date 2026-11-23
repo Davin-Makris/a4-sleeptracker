@@ -7,11 +7,6 @@ import { IonContent, IonHeader, IonCard, IonCardContent,
 import { SleepStorageService } from '../services/local-storage.service';
 import { StanfordSleepinessData } from '../data/stanford-sleepiness-data';
 
-interface SleepinessRecord{
-  timeOfDay: string;
-  sleepinessScore : number;
-}
-
 @Component({
   selector: 'app-day',
   templateUrl: './day.page.html',
