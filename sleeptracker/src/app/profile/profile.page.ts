@@ -77,6 +77,14 @@ export class ProfilePage implements OnInit {
     const settings:UserInfo | undefined = await this.storage.get<UserInfo>(this.key);
 
     if (!settings){
+      this.isMorningPerson = true;
+      this.pfpIconName = 'person';
+      this.userName = '';
+      this.placeholderStr = "Enter your name here";
+
+      var inptBox = document.querySelector<HTMLIonInputElement>("name_input");
+      if (inptBox) {inptBox.value = ''; console.log("idk why this doesn't work");}
+
       return;
     }
 
