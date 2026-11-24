@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonCard, IonCardContent, 
-      IonCardHeader, IonCardTitle, IonRange, IonButton, IonDatetime, IonToast} from '@ionic/angular/standalone';
+      IonCardHeader, IonCardTitle, IonRange, IonButton, IonDatetime, IonToast, IonIcon} from '@ionic/angular/standalone';
 
 import { SleepStorageService } from '../services/local-storage.service';
 import { StanfordSleepinessData } from '../data/stanford-sleepiness-data';
@@ -13,7 +13,7 @@ import { StanfordSleepinessData } from '../data/stanford-sleepiness-data';
   styleUrls: ['./day.page.scss'],
   standalone: true,
   imports: [IonContent, IonHeader, CommonModule, FormsModule, 
-        IonCard, IonCardContent, IonCardHeader, IonRange, IonButton, IonCardTitle, IonDatetime, IonToast]
+        IonCard, IonCardContent, IonCardHeader, IonRange, IonButton, IonCardTitle, IonDatetime, IonToast, IonIcon]
 })
 export class DayPage implements OnInit {
   timeOfDay = new Date().toISOString();
