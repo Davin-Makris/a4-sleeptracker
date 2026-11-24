@@ -9,6 +9,7 @@ import 'chartjs-adapter-luxon';
 import { OvernightSleepData } from '../data/overnight-sleep-data';
 import { SleepStorageService } from '../services/local-storage.service';
 import { StanfordSleepinessData } from '../data/stanford-sleepiness-data';
+import { timeout } from 'rxjs';
 
 @Component({
   selector: 'app-stats',
@@ -24,6 +25,9 @@ export class StatsPage implements OnInit {
   private OvernightChart?: Chart;
   private DayChart?: Chart;
 
+  tempSleepRecords: OvernightSleepData[] = [];
+  tempWakeRecords: StanfordSleepinessData[] = [];
+
   // this is the cancel button for the clear data ion-toast in stats.page.html
    toastButtons = [
     {
@@ -31,6 +35,7 @@ export class StatsPage implements OnInit {
       role: 'cancel',
       handler: () => {
         this.undoClearData();
+        this.makeCharts();
       },
     },
   ];
@@ -48,6 +53,8 @@ export class StatsPage implements OnInit {
       await this.loadDummyData();
     }
     else {
+      this.tempSleepRecords = this.sleepRecords;
+      this.tempWakeRecords = this.wakeRecords;
       await this.storage.reset();
       this.sleepRecords = [];
       this.wakeRecords = [];
@@ -58,6 +65,25 @@ export class StatsPage implements OnInit {
   async ionViewWillEnter(): Promise<void> {
     await this.fetchRecords();
     this.makeCharts();
+
+    setTimeout(async () => {
+      const sleep = await this.storage.get<OvernightSleepData[]>(
+        'overnight-records'
+      ) ?? [];
+
+      const wake = await this.storage.get<StanfordSleepinessData[]>(
+        'sleepiness-records'
+      ) ?? [];
+
+      if (
+        sleep.length !== this.sleepRecords.length ||
+        wake.length !== this.wakeRecords.length
+      ) {
+        await this.fetchRecords();
+        this.makeCharts();
+      }
+    }, 3000); //check if theres any changes from the last page 3 seconds after loading
+
   }
 
   private makeCharts(): void {
@@ -80,7 +106,7 @@ export class StatsPage implements OnInit {
 
   private makeDayChart(): void {
     const canvas = document.getElementById('day-chart') as HTMLCanvasElement | null;
-    const data = this.wakeRecords;
+    const data = this.wakeRecords.slice(-14);
 
     if (!data || !canvas){
       return;
@@ -128,7 +154,7 @@ export class StatsPage implements OnInit {
   private makeOvernightChart(): void {
     const hourOffset : number = 20 * 60; //offset the chart from midnight, this shows starting at 8pm
     const canvas = document.getElementById('sleep-line-chart') as HTMLCanvasElement | null;
-    const data = this.sleepRecords;
+    const data = this.sleepRecords.slice(-14);
 
     if (!data || !canvas){
       return;
@@ -232,8 +258,15 @@ export class StatsPage implements OnInit {
  
 
   // this is for the cancel button in the clear data toast in stats.page.html
-  public undoClearData(): void{
-    console.log("clear data button clicked")
+  public async undoClearData(): Promise<void>{
+    const sleepKey = 'overnight-records';
+    const dayKey = "sleepiness-records";
+
+    console.log("clear data button clicked");
+    this.sleepRecords = this.tempSleepRecords;
+    this.wakeRecords = this.tempWakeRecords;
+    await this.storage.set(sleepKey, this.sleepRecords);
+    await this.storage.set(dayKey, this.wakeRecords);
   }
 
 }
